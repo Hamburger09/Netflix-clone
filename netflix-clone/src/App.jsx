@@ -1,5 +1,5 @@
 import React from "react";
-import "/Users/99899/Documents/Coding Files/React-Netflix-Clone/netflix-clone/style/App.css";
+import "./style/App.css";
 import Row from "./Row";
 import requests from "./requests";
 import Banner from "./Banner";
