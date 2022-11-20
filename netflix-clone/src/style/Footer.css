@@ -1,0 +1,74 @@
+.footer {
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  color: #f6f6f6;
+  border-bottom: 2px solid #be3144;
+}
+.contactMe {
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+}
+.contact_lists {
+  font-size: 1.4rem;
+}
+.contact_lists a {
+  text-decoration: none;
+  color: #f6f6f6;
+  margin-right: 17px;
+}
+i::before {
+  margin-right: 7px;
+}
+i {
+  transition: 0.3s ease-in-out;
+}
+i:hover {
+  transform: translateY(7px);
+  color: aqua;
+}
+footer {
+  display: flex;
+  text-align: center;
+  line-height: 1;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 60px;
+  padding: 20px;
+}
+footer > p:nth-of-type(1) {
+  font-size: 2rem;
+}
+.dilshod__cube {
+  display: inline;
+  object-fit: contain;
+  height: 20px;
+}
+.created__dilshod {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+
+@media only screen and (max-width: 490px) {
+  .contact_lists {
+    display: flex;
+    margin-top: -30px;
+    font-size: 1.17rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 2;
+  }
+  footer {
+    height: 100px;
+  }
+  footer > p:nth-of-type(1) {
+    margin-top: 10px;
+    font-size: 1.6rem;
+  }
+}
