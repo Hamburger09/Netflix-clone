@@ -22,7 +22,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
     }
     fetchData().catch((error) => console.warn(error));
   }, [fetchUrl]); // dependencies
-  console.log(movies);
+  // console.log(movies);
 
   const opts = {
     height: "390",
