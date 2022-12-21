@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { instance } from "./axios";
 import "./style/row.css";
 import Youtube from "react-youtube";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchUrl, isLarge }) {
+  const ref = useRef(null);
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -65,6 +66,7 @@ function Row({ title, fetchUrl, isLarge }) {
         setLoading(false);
         alert("No video found😔");
       });
+    ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -80,11 +82,13 @@ function Row({ title, fetchUrl, isLarge }) {
         {movies.map((movie) => {
           if (movie.backdrop_path) {
             return (
-              <div key={movie.id} className="row__posterDiv">
+              <div
+                key={movie.id}
+                className={`row__posterDiv ${isLarge && "row__posterLarge"}`}
+              >
                 <img
                   loading="lazy"
                   onClick={handleButtonClick}
-                  className={`row__poster ${isLarge && "row__posterLarge"}`}
                   src={`${base_url}${
                     isLarge ? movie.backdrop_path : movie.poster_path
                   }`}
@@ -107,6 +111,7 @@ function Row({ title, fetchUrl, isLarge }) {
           }
         })}
       </div>
+      <div ref={ref}></div>
       {trailerUrl && (
         <div className="closeButton" onClick={closeClick}>
           <CloseIcon />
