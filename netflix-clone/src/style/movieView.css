@@ -1,0 +1,89 @@
+.movieView {
+  display: flex;
+  flex-direction: row;
+  margin-top: 14px;
+  padding: 0 0 0 23px;
+}
+.movieBackground {
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  padding: 0 20px 0 20px;
+  /* width: 100%; */
+  justify-content: center;
+  align-items: center;
+}
+.movieBackground > h1 {
+  line-height: 40px;
+  font-size: 60px;
+}
+.movieView > img {
+  width: 100%;
+  margin-right: 40px;
+  height: auto;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+.imageOverview {
+  line-height: 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.imageOverview > p {
+  line-height: 25px;
+}
+.genreList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.genre {
+  font-size: 20px;
+  font-weight: bolder;
+}
+.productionCompanies {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: flex-start;
+}
+.logo_path {
+  width: 20%;
+  height: auto;
+  object-fit: contain;
+  max-height: 30px;
+}
+.company {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+}
+@media screen and (max-width: 1000px) {
+  .logo_patho {
+    margin-right: 20px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .movieBackground > h1 {
+    font-size: 40px;
+  }
+  .movieView {
+    flex-direction: column;
+  }
+  .movieView > img {
+    max-width: 200px;
+  }
+  .genre {
+    font-size: 16px;
+  }
+  .logo_path {
+    margin-right: 20px;
+  }
+}

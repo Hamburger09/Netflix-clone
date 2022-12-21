@@ -1,12 +1,36 @@
 import React, { useState, useEffect } from "react";
 import "./style/Nav.css";
+import { Link, useNavigate } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
 
-function Nav() {
+function Nav({ searchText, setSearchText, setSearch }) {
+  const navigate = useNavigate();
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/search");
+    if (searchText) {
+      async function getMovies() {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=14bf041fa050b017db724739e0e27663&language=en-US&query=${searchText}&page=1&include_adult=false`
+        );
+        const data = await response.json();
+        setSearch(data.results);
+      }
+      getMovies();
+    }
+  };
+
+  const updateSearchText = (e) => {
+    setSearchText(e.target.value);
+    setTimeout(() => {
+      navigate("/search");
+    }, 500);
+  };
   const [show, handleShow] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 60) {
         handleShow(true);
       } else handleShow(false);
     });
@@ -14,20 +38,35 @@ function Nav() {
   }, []);
   return (
     <div className={`nav ${show && "nav__black"}`}>
-      <a href="https://www.netflix.com/" target={"_blank"}>
+      <Link to="/">
         <img
           className="nav__logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Logonetflix.png/1200px-Logonetflix.png"
           alt="Netflix Logo"
         />
-      </a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+      </Link>
+      <form action="search" className="searchForm">
+        <div className="searchIcon">
+          <SearchIcon />
+          <input
+            type="search"
+            placeholder="Search"
+            className="searchInput"
+            value={searchText}
+            onChange={updateSearchText}
+          />
+        </div>
+        <button type="submit" onClick={handleClick}>
+          Search
+        </button>
+      </form>
+      {/* <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
         <img
           className="nav__avatar"
           src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3170728/emojis-clipart-md.png"
           alt="Blue smile"
         />
-      </a>
+      </a> */}
     </div>
   );
 }

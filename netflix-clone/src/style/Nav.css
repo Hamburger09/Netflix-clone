@@ -3,7 +3,7 @@
   top: 0;
   width: 100%;
   height: 30px;
-  z-index: 1;
+  z-index: 4;
   padding: 10px 20px 20px 20px;
   display: flex;
   justify-content: space-between;
@@ -21,10 +21,61 @@
   width: 80px;
   object-fit: contain;
 }
-.nav__avatar {
+.searchForm {
   position: fixed;
   top: 15px;
-  right: 20px;
-  width: 30px;
-  object-fit: contain;
+  right: 7px;
+
+  display: flex;
+  align-items: center;
+}
+.searchForm > button {
+  background-color: rgba(51, 51, 51, 0.9);
+
+  border: none;
+  border-radius: 5px;
+
+  margin-right: 1rem;
+  padding: 0.65rem 1.7rem 0.65rem 1.7rem;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+.searchForm > button:hover {
+  background-color: #f6f6f6;
+  color: black;
+  transition: all 0.2s;
+}
+
+.searchForm > button:focus,
+.searchForm > button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.searchInput {
+  border: none;
+  outline: none;
+  background: none;
+}
+.searchIcon {
+  display: flex;
+  margin-right: 10px;
+  align-items: center;
+  padding: 0.4rem;
+  border-radius: 5px;
+  background-color: #111;
+  transition: 0.1s;
+}
+.searchIcon:focus,
+.searchIcon:focus-within {
+  outline: 1px auto -webkit-focus-ring-color;
+  transform: scale(1.05);
+  transition: all 0.3s;
+}
+@media screen and (max-width: 500px) {
+  .searchIcon > input {
+    width: 80px;
+  }
+  .searchForm > button {
+    padding: 0.6rem 1rem 0.6rem 1rem;
+  }
 }

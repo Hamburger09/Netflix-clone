@@ -1,0 +1,129 @@
+.View {
+  margin-top: 80px;
+}
+
+.searchView {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin-top: 40px;
+}
+
+.detailsButtonDiv {
+  margin-left: -7px;
+  padding: 20px;
+  text-align: start;
+}
+.detailsButton {
+  text-decoration: none;
+  background-color: #0a58ca;
+  color: whitesmoke;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100vh;
+  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.detailsButton:hover {
+  color: #111;
+  background-color: whitesmoke;
+}
+.searchCard {
+  width: 260px;
+  height: auto;
+  margin: 7px;
+  border: 1px solid dimgrey;
+  display: flex;
+  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 7px;
+  color: whitesmoke;
+  text-decoration: none;
+}
+.searchCard > img {
+  border-radius: 7px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.searchCard > h2 {
+  font-size: 20px;
+  padding: 15px;
+}
+.playButton {
+  display: flex;
+  align-items: center;
+  width: 60px;
+  padding: 4px;
+  border-radius: 5px;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  background-color: #0a58ca;
+}
+.playButton:hover {
+  color: #111;
+  background-color: whitesmoke;
+}
+.searchCard:hover {
+  transform: scale(1.03);
+}
+.closeButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #0a58ca;
+}
+.loader-container {
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180.43deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 2;
+}
+.loader {
+  display: flex;
+  border: 7px solid #000;
+  border-radius: 50%;
+  border-top: 7px solid #f3f3f3;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: 40%;
+  left: 49%;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@media screen and (max-width: 550px) {
+  .searchCard {
+    width: 350px;
+  }
+}
