@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Row({ title, fetchUrl }) {
+function Row({ title, fetchUrl, isLarge }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -84,13 +84,9 @@ function Row({ title, fetchUrl }) {
                 <img
                   loading="lazy"
                   onClick={handleButtonClick}
-                  className={`row__poster ${
-                    title == "NETFLIX ORIGINALS" && "row__posterLarge"
-                  }`}
+                  className={`row__poster ${isLarge && "row__posterLarge"}`}
                   src={`${base_url}${
-                    title == "NETFLIX ORIGINALS"
-                      ? movie.backdrop_path
-                      : movie.poster_path
+                    isLarge ? movie.backdrop_path : movie.poster_path
                   }`}
                   alt={movie.name}
                 />
