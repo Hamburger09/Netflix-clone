@@ -1,5 +1,5 @@
 .row {
-  margin-left: 20px;
+  margin-left: 15px;
   margin-top: 10px;
   color: white;
 }
@@ -8,7 +8,7 @@
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
-  padding: 20px;
+  padding: 15px;
 }
 
 .row__posters::-webkit-scrollbar {
