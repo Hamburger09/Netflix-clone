@@ -31,7 +31,7 @@
 }
 .searchForm > button {
   background-color: rgba(51, 51, 51, 0.9);
-
+  color: whitesmoke;
   border: none;
   border-radius: 5px;
 
@@ -54,6 +54,7 @@
 .searchInput {
   border: none;
   outline: none;
+  color: whitesmoke;
   background: none;
 }
 .searchIcon {
@@ -71,6 +72,33 @@
   transform: scale(1.05);
   transition: all 0.3s;
 }
+.loader {
+  border: 7px solid #000;
+  border-radius: 50%;
+  border-top: 7px solid #f3f3f3;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  position: fixed;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
 @media screen and (max-width: 500px) {
   .searchIcon > input {
     width: 80px;

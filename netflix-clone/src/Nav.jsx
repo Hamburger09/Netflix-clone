@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 
 function Nav({ searchText, setSearchText, setSearch }) {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
+    setLoading(true);
     navigate("/search");
     if (searchText) {
       async function getMovies() {
@@ -15,6 +17,7 @@ function Nav({ searchText, setSearchText, setSearch }) {
         );
         const data = await response.json();
         setSearch(data.results);
+        setLoading(false);
       }
       getMovies();
     }
@@ -38,6 +41,11 @@ function Nav({ searchText, setSearchText, setSearch }) {
   }, []);
   return (
     <div className={`nav ${show && "nav__black"}`}>
+      {loading && (
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
+      )}
       <Link to="/">
         <img
           className="nav__logo"
