@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./style/Nav.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 
 function Nav({ searchText, setSearchText, setSearch }) {
@@ -22,6 +22,10 @@ function Nav({ searchText, setSearchText, setSearch }) {
       getMovies();
     }
   };
+  const param = useParams();
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
 
   const updateSearchText = (e) => {
     setSearchText(e.target.value);
@@ -30,7 +34,7 @@ function Nav({ searchText, setSearchText, setSearch }) {
     }, 500);
   };
   const [show, handleShow] = useState(false);
-
+  // console.log(param);
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 60) {
@@ -51,6 +55,7 @@ function Nav({ searchText, setSearchText, setSearch }) {
           className="nav__logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Logonetflix.png/1200px-Logonetflix.png"
           alt="Netflix Logo"
+          // onClick={param && refreshPage}
         />
       </Link>
       <form action="search" className="searchForm">

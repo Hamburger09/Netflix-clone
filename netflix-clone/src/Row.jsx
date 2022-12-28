@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { instance } from "./axios";
 import "./style/row.css";
 import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Row({ title, fetchUrl, isLarge }) {
-  const ref = useRef(null);
+function Row({ title, fetchUrl, isLarge, id }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isShown, setIsShown] = useState(false);
+  const [mobile, setMobile] = useState(false);
 
   // A snippet of code which runs based on a specific condition/variable
   useEffect(() => {
@@ -66,11 +70,36 @@ function Row({ title, fetchUrl, isLarge }) {
         setLoading(false);
         alert("No video found😔");
       });
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+    window.scrollBy({
+      top: "300",
+    });
   };
-
+  const rowPosters = document.querySelectorAll(".row__posters");
+  const row = document.querySelector(".row");
+  const handleScrollLeft = () => {
+    rowPosters[id].scrollBy({
+      left: "500",
+    });
+  };
+  const handleScrollRight = () => {
+    rowPosters[id].scrollBy({
+      left: "-500",
+    });
+  };
+  const matches = useMediaQuery("(max-width: 620px)");
+  useEffect(() => {
+    if (matches) {
+      setMobile(false);
+    } else {
+      setMobile(true);
+    }
+  }, [matches, []]);
   return (
-    <div className="row">
+    <div
+      className="row"
+      onMouseEnter={() => setIsShown(true)}
+      onMouseLeave={() => setIsShown(false)}
+    >
       {loading && (
         <div className="loader-container">
           <div className="loader"></div>
@@ -78,7 +107,18 @@ function Row({ title, fetchUrl, isLarge }) {
       )}
       <h2>{title}</h2>
 
-      <div className="row__posters">
+      <div className="row__posters snaps-inline">
+        {isShown && mobile && (
+          <button
+            type="button"
+            class={`backArrow ${isLarge && "backArrowLarge"}`}
+            aria-label="Prev"
+            title="Prev"
+            onClick={handleScrollRight}
+          >
+            <ArrowBackIosIcon className="Arrow" />
+          </button>
+        )}
         {movies.map((movie) => {
           if (movie.backdrop_path) {
             return (
@@ -106,12 +146,20 @@ function Row({ title, fetchUrl, isLarge }) {
                 )}
               </div>
             );
-          } else {
-            return <div style={{ display: "none" }} key={movie.id}></div>;
           }
         })}
+        {isShown && mobile && (
+          <button
+            type="button"
+            className="forwardArrow"
+            aria-label="Next"
+            title="Next"
+            onClick={handleScrollLeft}
+          >
+            <ArrowForwardIosIcon className="Arrow" />
+          </button>
+        )}
       </div>
-      <div ref={ref}></div>
       {trailerUrl && (
         <div className="closeButton" onClick={closeClick}>
           <CloseIcon />

@@ -47,31 +47,38 @@ function App() {
                 title="TRENDING NOW"
                 fetchUrl={requests.fetchTrending}
                 isLarge
+                id="0"
               />
               <Row
                 title="Netflix originals"
                 fetchUrl={requests.fetchNetflixOriginals}
+                id="1"
               />
 
-              <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
+              <Row id="2" title="Top Rated" fetchUrl={requests.fetchTopRated} />
               <Row
                 title="Action Movies"
+                id="3"
                 fetchUrl={requests.fetchActionMovies}
               />
               <Row
                 title="Comedy Movies"
+                id="4"
                 fetchUrl={requests.fetchComedyMovies}
               />
               <Row
                 title="Horror Movies"
+                id="5"
                 fetchUrl={requests.fetchHorrorMovies}
               />
               <Row
                 title="Romance Movies"
+                id="6"
                 fetchUrl={requests.fetchRomanceMovies}
               />
               <Row
                 title="Documentaries"
+                id="7"
                 fetchUrl={requests.fetchDocumentaries}
               />
               <Footer />

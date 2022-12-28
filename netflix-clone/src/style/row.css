@@ -2,6 +2,7 @@
   margin-left: 0;
   margin-top: 10px;
   color: white;
+  transition: 0.2s ease-in-out;
 }
 .row > h2 {
   margin-left: 15px;
@@ -9,36 +10,17 @@
 .row__posters {
   display: flex;
   overflow-y: hidden;
+  position: relative;
   overflow-x: scroll;
+  overscroll-behavior-inline: contain;
   padding: 15px;
 }
-.loader-container {
-  position: fixed;
-  top: 0;
-
-  display: flex;
-
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(
-    180.43deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
-  z-index: 2;
+.snaps-inline {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 2rem;
 }
-.loader {
-  display: flex;
-  border: 7px solid #000;
-  border-radius: 50%;
-  border-top: 7px solid #f3f3f3;
-  width: 40px;
-  height: 40px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  position: fixed;
-  top: 50%;
-  left: 45%;
+.snaps-inline > * {
+  scroll-snap-align: start;
 }
 
 .row__posters::-webkit-scrollbar {
@@ -54,6 +36,53 @@
   object-fit: cover;
   max-height: 200px;
   cursor: pointer;
+}
+.backArrow {
+  position: sticky;
+  left: -15px;
+  z-index: 3;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: white;
+  max-width: 30px;
+  height: 200px;
+}
+.backArrowLarge {
+  height: 250px;
+}
+.forwardArrow {
+  position: sticky;
+  right: -15px;
+  display: flex;
+  justify-content: center;
+  border: none;
+  align-items: center;
+  background: transparent;
+  color: white;
+  z-index: 3;
+  cursor: pointer;
+  max-width: 30px;
+}
+.backArrow:hover .Arrow {
+  transform: scale(1.2);
+}
+.backArrow:hover {
+  background: linear-gradient(
+    180.43deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+.forwardArrow:hover {
+  background: linear-gradient(
+    180.43deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+.forwardArrow:hover .Arrow {
+  transform: scale(1.2);
 }
 
 .row__posterLarge > img {
@@ -104,6 +133,18 @@
 .row__posterDiv:hover {
   transform: scale(1.1);
 }
+.row__posterDiv:nth-of-type(1):hover {
+  z-index: 5;
+}
 .row__posterLarge:hover {
   transform: scale(1.03);
+  z-index: 4;
+}
+@media screen and (max-width: 550px) {
+  .row__posterLarge > img {
+    max-height: 202px;
+  }
+  .snaps-inline {
+    scroll-padding-inline: 1rem;
+  }
 }
