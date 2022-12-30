@@ -11,22 +11,28 @@
 .contactMe {
   font-size: 1.8rem;
   margin-bottom: 40px;
+  font-family: Manrope;
 }
 .contact_lists {
   font-size: 1.4rem;
+  display: flex;
 }
 .contact_lists a {
   text-decoration: none;
   color: #f6f6f6;
   margin-right: 17px;
 }
+.contact-details {
+  display: flex;
+  align-items: center;
+  transition: 0.15s ease-in-out;
+}
+
 i::before {
-  margin-right: 7px;
+  margin-right: 5px;
 }
-i {
-  transition: 0.3s ease-in-out;
-}
-i:hover {
+
+.contact-details:hover {
   transform: translateY(7px);
   color: aqua;
 }

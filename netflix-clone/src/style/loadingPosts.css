@@ -1,0 +1,15 @@
+.loadingCard {
+  background-color: gray;
+  /* width: 200px; */
+  /* height: 250px; */
+  animation: loading 1.5s linear infinite;
+  transition: 0.3s ease-in-out;
+}
+@keyframes loading {
+  0% {
+    background-color: gray;
+  }
+  100% {
+    background-color: #a9a9a9;
+  }
+}

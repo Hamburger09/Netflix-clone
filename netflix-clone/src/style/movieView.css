@@ -18,18 +18,28 @@
   line-height: 40px;
   font-size: 60px;
 }
-.movieView > img {
+.movieView img {
   width: 100%;
-  margin-right: 40px;
+  min-width: 400px;
+  max-width: 401px;
+  /* aspect-ratio: calc(16 / 9); */
+  min-height: 500px;
+  max-height: 578px;
   height: auto;
-  max-width: 400px;
   border-radius: 10px;
 }
 
+.placeholder {
+  width: 401px;
+  height: 578px;
+  background-color: "gray";
+  animation: loading 1.5s linear infinite;
+}
 .imageOverview {
   line-height: 40px;
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
   text-align: left;
 }
 .imageOverview > p {
@@ -44,28 +54,14 @@
   font-size: 20px;
   font-weight: bolder;
 }
-.productionCompanies {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
-  align-items: flex-start;
+.place {
+  background-color: gray;
+  animation: loading 1.5s linear infinite;
+  border-radius: 5px;
 }
-.logo_path {
-  width: 20%;
-  height: auto;
-  object-fit: contain;
-  max-height: 30px;
-}
-.company {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 100%;
-}
+
 @media screen and (max-width: 1000px) {
-  .logo_patho {
+  .logo_path {
     margin-right: 20px;
   }
 }
@@ -77,13 +73,15 @@
   .movieView {
     flex-direction: column;
   }
-  .movieView > img {
+  .movieView img {
     max-width: 200px;
+    min-width: 300px;
+    object-fit: cover;
+  }
+  .imageOverview {
+    margin-left: 0;
   }
   .genre {
     font-size: 16px;
-  }
-  .logo_path {
-    margin-right: 20px;
   }
 }

@@ -1,20 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./style/searchView.css";
 import Row from "./Row";
 import requests from "./requests";
 import Banner from "./Banner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import movieTrailer from "movie-trailer";
 import Youtube from "react-youtube";
 import CloseIcon from "@mui/icons-material/Close";
 import Footer from "./Footer";
+import LoadingCard from "./LoadingPosts";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const imageUrl = "https://image.tmdb.org/t/p/w500";
 
 const SearchView = ({ searchResults }) => {
   const [trailerUrl, setTrailerUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = (movie) => {
     setLoading(true);
@@ -53,6 +56,11 @@ const SearchView = ({ searchResults }) => {
       autoplay: 1,
     },
   };
+  const place = (
+    <div className="loadingPost">
+      <div className="imagePost"></div>
+    </div>
+  );
 
   if (searchResults.length !== 0) {
     return (
@@ -74,24 +82,56 @@ const SearchView = ({ searchResults }) => {
             return (
               <div key={movie.id} className="searchCard">
                 {movie.backdrop_path ? (
-                  <img src={imageUrl + movie.backdrop_path} alt="Null" />
+                  <ProgressiveImage
+                    src={imageUrl + movie.backdrop_path}
+                    placeholder=""
+                  >
+                    {(src, loading) => {
+                      return loading ? (
+                        place
+                      ) : (
+                        <div>
+                          <img src={src} alt="an Image" loading="lazy" />
+                          <h2>{movie.original_title}</h2>
+                          <div
+                            className="playButton"
+                            onClick={() => handleClick(movie)}
+                            onClickCapture={scrollHandle}
+                          >
+                            <PlayCircleOutlineIcon />
+                            <p class="playButtonText">Play</p>
+                          </div>
+                          <div className="detailsButtonDiv">
+                            <Link
+                              className="detailsButton"
+                              to={`/movie/${movie.id}`}
+                            >
+                              Show details
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    }}
+                  </ProgressiveImage>
                 ) : (
-                  <div style={{ display: "none" }}></div>
+                  <div>
+                    <div style={{ display: "none" }}></div>
+                    <h2>{movie.original_title}</h2>
+                    <div
+                      className="playButton"
+                      onClick={() => handleClick(movie)}
+                      onClickCapture={scrollHandle}
+                    >
+                      <PlayCircleOutlineIcon />
+                      <p class="playButtonText">Play</p>
+                    </div>
+                    <div className="detailsButtonDiv">
+                      <Link className="detailsButton" to={`/movie/${movie.id}`}>
+                        Show details
+                      </Link>
+                    </div>
+                  </div>
                 )}
-                <h2>{movie.original_title}</h2>
-                <div
-                  className="playButton"
-                  onClick={() => handleClick(movie)}
-                  onClickCapture={scrollHandle}
-                >
-                  <PlayCircleOutlineIcon />
-                  <p class="playButtonText">Play</p>
-                </div>
-                <div className="detailsButtonDiv">
-                  <Link className="detailsButton" to={`/movie/${movie.id}`}>
-                    Show details
-                  </Link>
-                </div>
               </div>
             );
           })}
@@ -101,24 +141,17 @@ const SearchView = ({ searchResults }) => {
     );
   } else {
     return (
-      <>
-        <Banner />
-
-        <Row title="Trending Now " fetchUrl={requests.fetchTrending} isLarge />
-        <Row
-          title="NETFLIX ORIGINALS"
-          fetchUrl={requests.fetchNetflixOriginals}
-          isLargeRow
-        />
-
-        <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
-        <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />
-        <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
-        <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
-        <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
-        <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
-        <Footer />
-      </>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "100vh",
+        }}
+      >
+        <h1 style={{ fontSize: "100px" }}>Oops, no results</h1>
+      </div>
     );
   }
 };

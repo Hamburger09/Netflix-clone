@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { instance } from "./axios";
 import "./style/row.css";
 import Youtube from "react-youtube";
@@ -8,6 +8,12 @@ import { Link } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import InfoIcon from "@mui/icons-material/Info";
+import LoadingPosts from "./LoadingPosts";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -18,6 +24,7 @@ function Row({ title, fetchUrl, isLarge, id }) {
   const [open, setOpen] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
 
   // A snippet of code which runs based on a specific condition/variable
   useEffect(() => {
@@ -26,6 +33,7 @@ function Row({ title, fetchUrl, isLarge, id }) {
     async function fetchData() {
       const request = await instance.get(fetchUrl);
       setMovies(request.data.results);
+      setImgLoading(false);
 
       return request.data.results;
     }
@@ -51,6 +59,11 @@ function Row({ title, fetchUrl, isLarge, id }) {
   const closeClick = () => {
     setTrailerUrl("");
   };
+  const placeholder = isLarge ? (
+    <div style={{ backgroundColor: "gray", height: "250px", width: "420px" }} />
+  ) : (
+    LoadingPosts
+  );
 
   const handleClick = (movie) => {
     setLoading(true);
@@ -75,7 +88,7 @@ function Row({ title, fetchUrl, isLarge, id }) {
     });
   };
   const rowPosters = document.querySelectorAll(".row__posters");
-  const row = document.querySelector(".row");
+  // const row = document.querySelector(".row");
   const handleScrollLeft = () => {
     rowPosters[id].scrollBy({
       left: "500",
@@ -95,11 +108,7 @@ function Row({ title, fetchUrl, isLarge, id }) {
     }
   }, [matches, []]);
   return (
-    <div
-      className="row"
-      onMouseEnter={() => setIsShown(true)}
-      onMouseLeave={() => setIsShown(false)}
-    >
+    <div className="row">
       {loading && (
         <div className="loader-container">
           <div className="loader"></div>
@@ -107,7 +116,11 @@ function Row({ title, fetchUrl, isLarge, id }) {
       )}
       <h2>{title}</h2>
 
-      <div className="row__posters snaps-inline">
+      <div
+        className="row__posters snaps-inline"
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}
+      >
         {isShown && mobile && (
           <button
             type="button"
@@ -125,21 +138,53 @@ function Row({ title, fetchUrl, isLarge, id }) {
               <div
                 key={movie.id}
                 className={`row__posterDiv ${isLarge && "row__posterLarge"}`}
+                onClick={handleButtonClick}
               >
-                <img
-                  loading="lazy"
-                  onClick={handleButtonClick}
+                <ProgressiveImage
                   src={`${base_url}${
                     isLarge ? movie.backdrop_path : movie.poster_path
                   }`}
-                  alt={movie.name}
-                />
+                  placeholder=""
+                  delay={260}
+                  // threshold={[0]}
+                >
+                  {(src, loading) => {
+                    return loading ? (
+                      placeholder
+                    ) : (
+                      <img src={src} alt="an Image" loading="eager" />
+                    );
+                  }}
+                </ProgressiveImage>
+
                 {open && (
                   <div className="dropdown">
                     <ul>
-                      <li onClick={() => handleClick(movie)}>Watch trailer</li>
+                      <li onClick={() => handleClick(movie)}>
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "5px",
+                            alignItems: "center",
+                          }}
+                        >
+                          <PlayCircleOutlineIcon />
+                          Watch trailer
+                        </div>
+                      </li>
                       <Link className="rowDetails" to={`/movie/${movie.id}`}>
-                        <li>Show details</li>
+                        <li>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "5px",
+                            }}
+                          >
+                            <InfoIcon />
+                            Show details
+                          </div>
+                        </li>
                       </Link>
                     </ul>
                   </div>

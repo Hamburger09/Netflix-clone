@@ -12,24 +12,28 @@ function Footer() {
             target="_blank"
             class="contact-details"
           >
-            <i class="fab fa-facebook-square">Facebook</i>
+            <i class="fab fa-facebook-square"></i>
+            <p>Facebook</p>
           </a>
           <a
             href="https://github.com/Hamburger09"
             target="_blank"
             class="contact-details"
           >
-            <i class="fab fa-github">GitHub</i>
+            <i class="fab fa-github"></i>
+            <p>GitHub</p>
           </a>
           <a
             href="mailto:akhmedov20092004@gmail.com"
             target="_blank"
             class="contact-details"
           >
-            <i class="fas fa-at">Email</i>
+            <i class="fas fa-at"></i>
+            <p>Email</p>
           </a>
           <a href="tel:+998-99-849-53-31" class="contact-details">
-            <i class="fas fa-mobile-alt">Call Me</i>
+            <i class="fas fa-mobile-alt"></i>
+            <p>Call Me</p>
           </a>
         </div>
       </div>

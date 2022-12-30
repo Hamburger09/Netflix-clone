@@ -5,9 +5,10 @@ import requests from "./requests";
 import Banner from "./Banner";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import SearchView from "./SearchView";
+// import SearchView from "./SearchView";
 import { Routes, Route } from "react-router-dom";
-import MovieView from "./MovieView";
+const LazyMovieView = React.lazy(() => import("./MovieView"));
+const LazySearchView = React.lazy(() => import("./SearchView"));
 
 function App() {
   const [search, setSearch] = useState([]);
@@ -35,8 +36,34 @@ function App() {
       />
 
       <Routes>
-        <Route path="/movie/:id" element={<MovieView />} />
-        <Route path="/search" element={<SearchView searchResults={search} />} />
+        <Route
+          path="/movie/:id"
+          element={
+            <React.Suspense
+              fallback={
+                <div className="loader-container">
+                  <div className="loader"></div>
+                </div>
+              }
+            >
+              <LazyMovieView />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <React.Suspense
+              fallback={
+                <div className="loader-container">
+                  <div className="loader"></div>
+                </div>
+              }
+            >
+              <LazySearchView searchResults={search} />
+            </React.Suspense>
+          }
+        />
         <Route
           path="/"
           element={

@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import "./style/movieView.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Footer from "./Footer";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -34,6 +37,9 @@ const MovieView = () => {
     }
     getIdMovie();
   }, [id]);
+  const placeholder = (
+    <div style={{ minWidth: "401px", height: "578px" }} className="place" />
+  );
 
   return (
     <>
@@ -48,11 +54,11 @@ const MovieView = () => {
         </div>
 
         <div className="movieView">
-          <img
-            src={base_url + movieDetails.poster_path}
-            alt="Image"
-            loading="lazy"
-          />
+          <ProgressiveImage src={base_url + movieDetails.poster_path}>
+            {(src, loading) => {
+              return loading ? placeholder : <img src={src} alt="an Image" />;
+            }}
+          </ProgressiveImage>
           <div className="imageOverview">
             <h2>Rating: {movieDetails.vote_average}</h2>
             <h3>{movieDetails.release_date}</h3>
@@ -68,29 +74,6 @@ const MovieView = () => {
               ) : (
                 <></>
               )}
-            </div>
-            <div className="productionCompanies">
-              <h1 style={{ fontSize: "16px" }}>Production Companies:</h1>
-              <div style={{ width: "100%" }}>
-                {companies ? (
-                  companies.map((company) => {
-                    if (company.logo_path) {
-                      return (
-                        <div key={company.id} className="company">
-                          <img
-                            src={base_url + company.logo_path}
-                            alt="Logo"
-                            className="logo_path"
-                          />
-                          <p>{company.name}</p>
-                        </div>
-                      );
-                    }
-                  })
-                ) : (
-                  <></>
-                )}
-              </div>
             </div>
 
             <a href={movieDetails.homepage} target="_blank">
