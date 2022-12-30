@@ -108,7 +108,11 @@ function Row({ title, fetchUrl, isLarge, id }) {
     }
   }, [matches, []]);
   return (
-    <div className="row">
+    <div
+      className="row"
+      onMouseEnter={() => setIsShown(true)}
+      onMouseLeave={() => setIsShown(false)}
+    >
       {loading && (
         <div className="loader-container">
           <div className="loader"></div>
@@ -116,11 +120,7 @@ function Row({ title, fetchUrl, isLarge, id }) {
       )}
       <h2>{title}</h2>
 
-      <div
-        className="row__posters snaps-inline"
-        onMouseEnter={() => setIsShown(true)}
-        onMouseLeave={() => setIsShown(false)}
-      >
+      <div className="row__posters snaps-inline">
         {isShown && mobile && (
           <button
             type="button"

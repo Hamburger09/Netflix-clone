@@ -93,7 +93,7 @@
 
 .dropdown {
   position: absolute;
-  bottom: 5.9px;
+  bottom: 5.77px;
   left: 0;
   width: 100%;
   z-index: 2;
@@ -145,7 +145,7 @@
 }
 @media screen and (max-width: 550px) {
   .row__posterLarge {
-    margin-bottom: -49px;
+    height: 208.2px;
   }
   .row__posterLarge img {
     height: 202px !important;
