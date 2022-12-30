@@ -144,7 +144,10 @@
   z-index: 4;
 }
 @media screen and (max-width: 550px) {
-  .row__posterLarge > span > img {
+  .row__posterLarge {
+    margin-bottom: -49px;
+  }
+  .row__posterLarge img {
     height: 202px !important;
   }
   .snaps-inline {
