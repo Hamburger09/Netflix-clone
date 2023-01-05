@@ -60,9 +60,19 @@ function Row({ title, fetchUrl, isLarge, id }) {
     setTrailerUrl("");
   };
   const placeholder = isLarge ? (
-    <div style={{ backgroundColor: "gray", height: "250px", width: "420px" }} />
+    <div
+      // style={{
+      //   backgroundColor: "gray",
+      //   height: "250px",
+      //   width: "420px",
+      //   filter: "blur(5px)",
+      //   transform: "translateY(46px)",
+      //   zIndex: "3",
+      // }}
+      className="face face1 placeholderLoadingLarge"
+    />
   ) : (
-    LoadingPosts
+    <div className="face face1">{LoadingPosts}</div>
   );
 
   const handleClick = (movie) => {
@@ -137,7 +147,7 @@ function Row({ title, fetchUrl, isLarge, id }) {
             return (
               <div
                 key={movie.id}
-                className={`row__posterDiv ${isLarge && "row__posterLarge"}`}
+                className={`row__posterDiv ${isLarge && "row__posterLarge"} `}
                 onClick={handleButtonClick}
               >
                 <ProgressiveImage
@@ -152,43 +162,46 @@ function Row({ title, fetchUrl, isLarge, id }) {
                     return loading ? (
                       placeholder
                     ) : (
-                      <img src={src} alt="an Image" loading="eager" />
+                      <img
+                        src={src}
+                        alt="an Image"
+                        loading="lazy"
+                        className="face face1"
+                      />
                     );
                   }}
                 </ProgressiveImage>
 
-                {open && (
-                  <div className="dropdown">
-                    <ul>
-                      <li onClick={() => handleClick(movie)}>
+                <div className="face face2">
+                  <ul>
+                    <li onClick={() => handleClick(movie)}>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "5px",
+                          alignItems: "center",
+                        }}
+                      >
+                        <PlayCircleOutlineIcon />
+                        Watch trailer
+                      </div>
+                    </li>
+                    <Link className="rowDetails" to={`/movie/${movie.id}`}>
+                      <li>
                         <div
                           style={{
                             display: "flex",
-                            gap: "5px",
                             alignItems: "center",
+                            gap: "5px",
                           }}
                         >
-                          <PlayCircleOutlineIcon />
-                          Watch trailer
+                          <InfoIcon />
+                          Show details
                         </div>
                       </li>
-                      <Link className="rowDetails" to={`/movie/${movie.id}`}>
-                        <li>
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "5px",
-                            }}
-                          >
-                            <InfoIcon />
-                            Show details
-                          </div>
-                        </li>
-                      </Link>
-                    </ul>
-                  </div>
-                )}
+                    </Link>
+                  </ul>
+                </div>
               </div>
             );
           }

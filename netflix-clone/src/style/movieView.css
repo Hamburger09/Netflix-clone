@@ -31,12 +31,12 @@
 .movieView a {
   color: #747bff;
 }
-.placeholder {
+/* .placeholder {
   width: 401px;
   height: 578px;
   background-color: "gray";
   animation: loading 1.5s linear infinite;
-}
+} */
 .imageOverview {
   line-height: 40px;
   display: flex;
@@ -57,6 +57,9 @@
   font-weight: bolder;
 }
 .place {
+  min-width: 401px;
+  filter: blur(1px);
+  height: 578px;
   background-color: gray;
   animation: loading 1.5s linear infinite;
   border-radius: 5px;
@@ -79,6 +82,11 @@
     max-width: 200px;
     min-width: 300px;
     object-fit: cover;
+  }
+  .place {
+    width: 300px;
+    min-height: 350px;
+    max-height: 450px;
   }
   .imageOverview {
     margin-left: 0;

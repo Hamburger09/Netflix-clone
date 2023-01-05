@@ -4,7 +4,7 @@ const LoadingCard = (
   <div
     className="loadingCard"
     style={{
-      width: "200px",
+      width: "170px",
       height: "250px",
     }}
   />

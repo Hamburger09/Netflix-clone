@@ -1,8 +1,7 @@
 .loadingCard {
   background-color: gray;
-  /* width: 200px; */
-  /* height: 250px; */
   animation: loading 1.5s linear infinite;
+  filter: blur(3px);
   transition: 0.3s ease-in-out;
 }
 @keyframes loading {

@@ -60,7 +60,7 @@ function App() {
                 </div>
               }
             >
-              <LazySearchView searchResults={search} />
+              <LazySearchView searchResults={search} searchText={searchText} />
             </React.Suspense>
           }
         />

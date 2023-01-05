@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "./style/searchView.css";
-import Row from "./Row";
-import requests from "./requests";
-import Banner from "./Banner";
 import { Link, useNavigate } from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import movieTrailer from "movie-trailer";
@@ -14,10 +11,9 @@ import ProgressiveImage from "react-progressive-graceful-image";
 
 const imageUrl = "https://image.tmdb.org/t/p/w500";
 
-const SearchView = ({ searchResults }) => {
+const SearchView = ({ searchResults, searchText }) => {
   const [trailerUrl, setTrailerUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleClick = (movie) => {
     setLoading(true);
@@ -77,6 +73,7 @@ const SearchView = ({ searchResults }) => {
             <p>Close Video</p>
           </div>
         )}
+        <h1>Search results for "{searchText}"</h1>
         <div className="searchView">
           {searchResults.map((movie) => {
             return (
@@ -141,16 +138,8 @@ const SearchView = ({ searchResults }) => {
     );
   } else {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          height: "100vh",
-        }}
-      >
-        <h1 style={{ fontSize: "100px" }}>Oops, no results</h1>
+      <div className="noResults">
+        <h1>Oops, no results</h1>
       </div>
     );
   }

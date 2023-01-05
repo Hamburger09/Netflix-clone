@@ -37,9 +37,7 @@ const MovieView = () => {
     }
     getIdMovie();
   }, [id]);
-  const placeholder = (
-    <div style={{ minWidth: "401px", height: "578px" }} className="place" />
-  );
+  const placeholder = <div className="place" />;
 
   return (
     <>
