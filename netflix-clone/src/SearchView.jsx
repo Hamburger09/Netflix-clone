@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style/searchView.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import movieTrailer from "movie-trailer";
 import Youtube from "react-youtube";

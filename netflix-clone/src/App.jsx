@@ -6,7 +6,7 @@ import Banner from "./Banner";
 import Nav from "./Nav";
 import Footer from "./Footer";
 // import SearchView from "./SearchView";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 const LazyMovieView = React.lazy(() => import("./MovieView"));
 const LazySearchView = React.lazy(() => import("./SearchView"));
 

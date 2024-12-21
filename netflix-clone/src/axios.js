@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 
 // base url to make requests to the movie database
 export const instance = axios.create({

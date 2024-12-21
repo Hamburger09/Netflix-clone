@@ -6,6 +6,7 @@ import Youtube from "react-youtube";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import movieTrailer from "movie-trailer";
 import { Link } from "react-router-dom";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -92,8 +93,7 @@ function Banner() {
         className="banner"
         style={{
           backgroundImage: `linear-gradient(180.43deg, rgba(0,0,0,0.60) 0%, rgba(0,0,0, 0.1) 100%),url(${path})`,
-        }}
-      >
+        }}>
         <div className="banner__contents">
           <h1 className="banner__title">
             {movie?.title ||
@@ -107,8 +107,8 @@ function Banner() {
               onClick={() => handleClick(movie)}
               title="Play"
               className="banner__button"
-              id="playButton"
-            >
+              id="playButton">
+              <PlayArrowIcon />
               Play
             </button>
             <Link to={`/movie/${movie?.id}`}>
